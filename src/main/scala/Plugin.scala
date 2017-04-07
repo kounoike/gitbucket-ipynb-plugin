@@ -12,7 +12,7 @@ class Plugin extends gitbucket.core.plugin.Plugin {
   override val pluginName: String = "ipynb Plugin"
   override val description: String = "Provides ipynb rendering for GitBucket."
   override val versions: List[Version] = List(
-    new Version("1.0.0")
+    new Version("0.1.0")
   )
 
   private[this] var renderer: Option[IpynbRenderer] = None
