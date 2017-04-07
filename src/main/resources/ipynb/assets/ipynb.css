@@ -1,0 +1,43 @@
+div.ipynb-input-prompt {
+    color: #000080;
+}
+div.ipynb-output-prompt {
+    color: #800000;
+}
+
+div.ipynb-innercell {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+div.ipynb-prompt {
+    min-width: 11ex;
+    margin: 0;
+    text-align: right;
+    padding: .4em;
+}
+
+div.ipynb-rendered {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    margin-bottom: .5em;
+}
+
+div.ipynb-stream{
+    margin-top: .5em;
+}
+div.ipynb-error {
+    margin-top: .5em;
+    color: #c80000;
+}
+
+div.ipynb-rendered-code {
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    background: #f7f7f7;
+}
