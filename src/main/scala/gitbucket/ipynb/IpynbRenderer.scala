@@ -10,12 +10,17 @@ import org.json4s.jackson.JsonMethods
 import play.twirl.api.{Html, HtmlFormat}
 import org.slf4j.LoggerFactory
 
+import scala.util.{Failure, Success, Try}
+
 class IpynbRenderer extends Renderer {
   private[this] val logger = LoggerFactory.getLogger(classOf[IpynbRenderer])
 
   def render(request: RenderRequest): Html = {
     import request._
-    Html(toHtml(filePath, fileContent, branch, repository, enableWikiLink, enableRefsLink)(context))
+    Html(Try(toHtml(filePath, fileContent, branch, repository, enableWikiLink, enableRefsLink)(context)) match {
+      case Success(v) => v
+      case Failure(e) => s"""<h2>Error</h2><div class="ipynb-error"><pre>$e</pre></div>"""
+    })
   }
 
   def shutdown() : Unit = {

@@ -1,6 +1,6 @@
 val Organization = "io.github.kounoike"
 val ProjectName = "gitbucket-ipynb-plugin"
-val ProjectVersion = "0.1.0"
+val ProjectVersion = "0.1.1"
 
 lazy val root = project in file(".")
 
