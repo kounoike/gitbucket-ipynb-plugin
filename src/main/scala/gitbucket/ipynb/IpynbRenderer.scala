@@ -59,15 +59,15 @@ class IpynbRenderer extends Renderer {
                 val innerHtml = o.data.map(m =>
                   m.keys.map {
                     case key@("text/html" | "text/latex" | "image/svg+xml") =>
-                      m.get(key) match {
-                        case Some(x: String) => x
-                        case Some(x: List[_]) => x.asInstanceOf[List[String]].mkString("")
+                      m.(key) match {
+                        case x: String => x
+                        case x: List[_] => x.asInstanceOf[List[String]].mkString("")
                         case _ => ""
                       }
                     case key@img if img.startsWith("image/") =>
-                      val src = m.get(key) match {
-                        case Some(x: String) => x
-                        case Some(x: List[_]) => x.asInstanceOf[List[String]].mkString("")
+                      val src = m(key) match {
+                        case x: String => x
+                        case x: List[_] => x.asInstanceOf[List[String]].mkString("")
                         case _ => ""
                       }
                       s"""<img src="data:$img;base64,$src">"""
