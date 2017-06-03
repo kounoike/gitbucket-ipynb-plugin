@@ -53,7 +53,7 @@ class IpynbRenderer extends Renderer {
               s"""<div class="ipynb-${o.output_type}">${o.text.map(HtmlFormat.escape).mkString("<br>")}</div>"""
             case "error" =>
               val stacktrace = o.traceback.map(_.mkString("")).getOrElse("")
-              s"""<div class="ipynb-error"><span>${o.ename.getOrElse("")}:</span><span>${o.evalue.getOrElse("")}</span>
+              s"""<div class="ipynb-error alert alert-danger"><span>${o.ename.getOrElse("")}:</span><span>${o.evalue.getOrElse("")}</span>
                  |<div class="ipynb-stacktrace">$stacktrace</div></div>""".stripMargin
             case "execute_result" | "display_data" =>
               val innerHtml = o.data.map(m =>
