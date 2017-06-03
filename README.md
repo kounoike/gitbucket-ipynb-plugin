@@ -1,14 +1,16 @@
 # gitbucket-ipynb-plugin
 
-A GitBucket plugin for rendering `.ipynb` file.
+A GitBucket plugin for rendering `.ipynb` file. `.ipynb` is [Jupyter](http://jupyter.org/) or [IPython](https://ipython.org/) file format.
 
-## Download
+## screenshot
 
-You can download binary from Release page.
+![20170604-021541 - mediatest sample ipynb at master - root mediatest - google chrome](https://cloud.githubusercontent.com/assets/6997928/26756112/96224284-48d6-11e7-894d-3bed93a2674d.png)
 
-## Installation
+## Install
 
-Downloaded binary to `$GITBUCKET_HOME/plugins` directory.
+1. Download *.jar from Releases.
+2. Deploy it to `GITBUCKET_HOME/plugins`.
+3. Restart GitBucket.
 
 ## Limitations
 
