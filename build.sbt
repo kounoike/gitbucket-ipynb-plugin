@@ -1,6 +1,6 @@
 val Organization = "io.github.kounoike"
 val ProjectName = "gitbucket-ipynb-plugin"
-val ProjectVersion = "0.2.0"
+val ProjectVersion = "0.2.1"
 
 lazy val root = project in file(".")
 
@@ -10,9 +10,9 @@ version := ProjectVersion
 scalaVersion := "2.12.1"
 
 libraryDependencies ++= Seq(
-  "io.github.gitbucket" %% "gitbucket"          % "4.11.0" % "provided",
+  "io.github.gitbucket" %% "gitbucket"          % "4.13.0" % "provided",
   "javax.servlet"        % "javax.servlet-api"  % "3.1.0"  % "provided",
-  "org.json4s"           %% "json4s-jackson"     % "3.5.0"
+  "org.json4s"           %% "json4s-jackson"     % "3.5.0" % "provided"
 )
 
 scalacOptions := Seq("-deprecation", "-feature", "-language:postfixOps")
