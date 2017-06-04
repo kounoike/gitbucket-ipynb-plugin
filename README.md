@@ -12,8 +12,19 @@ A GitBucket plugin for rendering `.ipynb` file. `.ipynb` is [Jupyter](http://jup
 2. Deploy it to `GITBUCKET_HOME/plugins`.
 3. Restart GitBucket.
 
+## Usage
+
+Store `.ipynb` file (from File->Download as->Notebook) to your Git repository and push it to GitBucket.
+If you don't know using IPython/Jupyter, try google it!
+
 ## Limitations
 
 - Javascript output is disabled.
 - traceback is not correctly rendered(not supported ANSI escape sequences and tabs.)
-- only support version 4.0 ipynb files.
+- only support version 3.0/4.0 ipynb files.
+- only tested Python2 kernel.
+
+## BugReport
+
+If your `.ipynb` is not correctly displayed, please make an issue with your `.ipynb` file if you can.
+
