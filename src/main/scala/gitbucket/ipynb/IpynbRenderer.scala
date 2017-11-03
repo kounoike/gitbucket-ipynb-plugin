@@ -27,7 +27,7 @@ class IpynbRenderer extends Renderer {
   }
 
   def getLanguage(nb: IPyNotebook, cell: Cell): String = {
-    if (nb.nbformat < 4) {
+    if (nb.nbformat <= 4) {
       cell.language.getOrElse("")
     } else {
       nb.metadata.language_info.get.name
