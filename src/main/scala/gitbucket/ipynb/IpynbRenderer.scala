@@ -71,9 +71,9 @@ class IpynbRenderer extends Renderer {
                       case _ => ""
                     }
                     s"""<img src="data:$img;base64,$src">"""
-                  case key@("text/plain" | "application/javascript" | _) =>
+                  case key@("application/javascript") => "" // disable Javascript
+                  case key@("text/plain" |  _) =>
                     m(key) match {
-                      // disable Javascript
                       case x: String => HtmlFormat.escape(x)
                       case x: List[_] => x.asInstanceOf[List[String]].map(HtmlFormat.escape).mkString("<br>")
                       case _ => ""
