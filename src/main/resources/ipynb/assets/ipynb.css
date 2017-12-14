@@ -31,6 +31,9 @@ div.ipynb-rendered {
 div.ipynb-stream{
     margin-top: .5em;
 }
+div.ipynb-stderr {
+    background-color: #fdd;
+}
 div.ipynb-error {
     margin-top: .5em;
     color: #c80000;

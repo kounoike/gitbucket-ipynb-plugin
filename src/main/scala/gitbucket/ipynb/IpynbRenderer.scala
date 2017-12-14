@@ -50,7 +50,7 @@ class IpynbRenderer extends Renderer {
         val outputHtml = cell.outputs.map{ o =>
           o.output_type match {
             case "stream" =>
-              s"""<div class="ipynb-${o.output_type}">${o.text.map(HtmlFormat.escape).mkString("<br>")}</div>"""
+              s"""<div class="ipynb-${o.output_type} ipynb-${o.name.getOrElse(o.stream.getOrElse("stdout"))}">${o.text.map(HtmlFormat.escape).mkString("<br>")}</div>"""
             case "error" =>
               val stacktrace = o.traceback.map(_.mkString("")).getOrElse("")
               s"""<div class="ipynb-error alert alert-danger"><span>${o.ename.getOrElse("")}:</span><span>${o.evalue.getOrElse("")}</span>
@@ -144,6 +144,7 @@ case class CellMetaData(
 
 case class CellOutput(
   name: Option[String],
+  stream: Option[String],
   output_type: String,
   text: Array[String],
   html: Option[String],
