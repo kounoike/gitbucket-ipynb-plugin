@@ -27,11 +27,7 @@ class IpynbRenderer extends Renderer {
   }
 
   def getLanguage(nb: IPyNotebook, cell: Cell): String = {
-    if (nb.nbformat < 4) {
-      cell.language.getOrElse("")
-    } else {
-      nb.metadata.language_info.get.name
-    }
+    nb.metadata.language_info.map(_.name).getOrElse(cell.language.getOrElse("Unknown"))
   }
 
   def getCellHtml(
@@ -182,13 +178,8 @@ case class KernelSpec(
   name: String
 )
 
-case class CodeMirrorMode(
-  name: String,
-  version: Int
-)
-
 case class LanguageInfo(
-  codemirror_mode: CodeMirrorMode,
+  codemirror_mode: Any,
   file_extension: String,
   mimetype: String,
   name: String,
