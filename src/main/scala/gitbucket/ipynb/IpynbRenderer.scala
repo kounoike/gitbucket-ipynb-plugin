@@ -51,9 +51,9 @@ class IpynbRenderer extends Renderer {
               val stacktrace = o.traceback.map(_.mkString("")).getOrElse("")
               s"""<div class="ipynb-error alert alert-danger"><span>${o.ename.getOrElse("")}:</span><span>${o.evalue.getOrElse("")}</span>
                  |<div class="ipynb-stacktrace">$stacktrace</div></div>""".stripMargin
-            case "execute_result" | "display_data" =>
+            case "execute_result" | "display_data" | "pyout" =>
               val innerHtml = o.data.map(m =>
-                m.keys.map {
+                m.keys.headOption.map {
                   case key@("text/html" | "text/latex" | "image/svg+xml") =>
                     m(key) match {
                       case x: String => x
@@ -76,7 +76,8 @@ class IpynbRenderer extends Renderer {
                     }
                 }.mkString("")
               ).mkString("")
-              val innerHtmlFormat3 = o.png.map(x => s"""<img src="data:image/png;base64,$x">""").getOrElse("") +
+              val innerHtmlFormat3 =
+                o.png.map(x => s"""<img src="data:image/png;base64,$x">""").getOrElse("") +
                 o.jpeg.map(x => s"""<img src="data:image/jpeg;base64,$x">""").getOrElse("") +
                 o.svg.getOrElse("") +
                 o.javascript.map(HtmlFormat.escape).getOrElse("") +
