@@ -86,8 +86,6 @@ class IpynbRenderer extends Renderer {
                 o.html.getOrElse("") +
                 o.text.map(HtmlFormat.escape).mkString("")
               s"""<div class="ipynb-execution-result">$innerHtml$innerHtmlFormat3</div>"""
-            case "pyout" => // format3
-              ""
             case _ =>
               s"""<div class="ipynb-unknown">Unknown output_type:${o.output_type} value:${o.data}</div>"""
           }
