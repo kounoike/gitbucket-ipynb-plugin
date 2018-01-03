@@ -53,7 +53,7 @@ class IpynbRenderer extends Renderer {
                  |<div class="ipynb-stacktrace">$stacktrace</div></div>""".stripMargin
             case "execute_result" | "display_data" | "pyout" =>
               val innerHtml = o.data.map(m =>
-                m.keys.headOption.map {
+                m.keys.filter(_ != "application/javascript").headOption.map {
                   case key@("text/html" | "text/latex" | "image/svg+xml") =>
                     m(key) match {
                       case x: String => x
