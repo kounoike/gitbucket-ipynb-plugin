@@ -1,0 +1,20 @@
+language: scala
+jdk:
+- oraclejdk8
+
+cache:
+  directories:
+    - "$HOME/.ivy2"
+    - "$HOME/.sbt"
+
+script:
+  - sbt assembly
+
+deploy:
+  provider: releases
+  api_key: "$GITHUB_TOKEN"
+  skip_cleanup: true
+  file_glob: true
+  file: target/scala-2.12/gitbucket-ipynb-plugin*.jar
+  on:
+    tags: true
