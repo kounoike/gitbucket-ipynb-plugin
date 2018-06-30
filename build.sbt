@@ -8,4 +8,4 @@ organization := Organization
 name := ProjectName
 version := ProjectVersion
 scalaVersion := "2.12.4"
-gitbucketVersion := "4.22.0"
+gitbucketVersion := "4.26.0"
