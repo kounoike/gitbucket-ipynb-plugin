@@ -135,7 +135,8 @@ class IpynbRenderer extends Renderer {
 
 case class CellMetaData(
   collapsed: Option[Boolean],
-  scrolled: Option[Boolean]
+  scrolled: Option[Boolean],
+  needs_background: Option[String]
 )
 
 case class CellOutput(
