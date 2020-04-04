@@ -1,5 +1,7 @@
 package gitbucket.ipynb
 
+import scala.util.matching.Regex
+import scala.util.matching.Regex.Match
 import gitbucket.core.controller.Context
 import gitbucket.core.plugin.{RenderRequest, Renderer}
 import gitbucket.core.service.RepositoryService.RepositoryInfo
@@ -28,6 +30,23 @@ class IpynbRenderer extends Renderer {
 
   def getLanguage(nb: IPyNotebook, cell: Cell): String = {
     nb.metadata.language_info.map(_.name).getOrElse(cell.language.getOrElse("Unknown"))
+  }
+
+  def renderAttachments(cell: Cell): String = {
+    val pat = """!\[[^\]]*\]\(attachment:([^\)]+)\)""".r
+    val inp = cell.source.mkString("")
+    val res = pat.replaceAllIn(inp, m => (getImgUrl(m,cell)) )
+    return res
+  }
+
+  def getImgUrl(m:Match, cell:Cell):String = {
+    val key = m.group(1)
+    val attachments = cell.attachments.getOrElse(Map())
+    if(attachments.size < 1 ||  !attachments.keySet.contains(key)){
+      return s"""<img src="">"""
+    }
+    val (imgType, encoded) = attachments(key).head
+    return s"""<img src="data:$imgType;base64, $encoded" >"""
   }
 
   def getCellHtml(
@@ -102,7 +121,7 @@ class IpynbRenderer extends Renderer {
         }
         s"""<div class="ipynb-innercell"><div class="ipynb-prompt ipynb-input-prompt">In $countStr</div><div class="ipynb-rendered ipynb-rendered-code">$rendered</div></div>$outputDiv"""
       case "markdown" =>
-        val md = cell.source.mkString("")
+        val md = renderAttachments(cell)
         val rendered = markdown(md, repository, branch, enableWikiLink, enableRefsLink, enableLineBreaks = true)
         s"""<div class="ipynb-innercell"><div clss="ipynb-prompt ipynb-input-prompt"></div><div class="ipynb-prompt ipynb-input-prompt"></div><div calss="ipynb-rendered ipynb-rendered-markdown">$rendered</div></div>"""
       case _ =>
@@ -165,7 +184,8 @@ case class Cell(
   outputs: Array[CellOutput],
   source: Array[String],
   input: Array[String],
-  language: Option[String]
+  language: Option[String],
+  attachments: Option[Map[String,Map[String, String]]]
 )
 
 case class Worksheet(
