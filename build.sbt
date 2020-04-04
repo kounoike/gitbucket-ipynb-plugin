@@ -1,11 +1,7 @@
-val Organization = "io.github.kounoike"
-val ProjectName = "gitbucket-ipynb-plugin"
-val ProjectVersion = "0.3.2"
-
 lazy val root = project in file(".")
 
-organization := Organization
-name := ProjectName
-version := ProjectVersion
-scalaVersion := "2.12.6"
-gitbucketVersion := "4.26.0"
+organization := "io.github.kounoike"
+name := "gitbucket-ipynb-plugin"
+version := "0.3.2"
+scalaVersion := "2.13.0"
+gitbucketVersion := "4.32.0"

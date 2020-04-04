@@ -53,6 +53,7 @@ class IpynbRenderer extends Renderer {
     nb: IPyNotebook,
     cell: Cell,
     repository: RepositoryInfo,
+    branch: String,
     enableWikiLink: Boolean,
     enableRefsLink: Boolean)(implicit context: Context): String = {
     cell.cell_type match{
@@ -121,7 +122,7 @@ class IpynbRenderer extends Renderer {
         s"""<div class="ipynb-innercell"><div class="ipynb-prompt ipynb-input-prompt">In $countStr</div><div class="ipynb-rendered ipynb-rendered-code">$rendered</div></div>$outputDiv"""
       case "markdown" =>
         val md = renderAttachments(cell)
-        val rendered = markdown(md, repository, enableWikiLink, enableRefsLink, enableLineBreaks = true)
+        val rendered = markdown(md, repository, branch, enableWikiLink, enableRefsLink, enableLineBreaks = true)
         s"""<div class="ipynb-innercell"><div clss="ipynb-prompt ipynb-input-prompt"></div><div class="ipynb-prompt ipynb-input-prompt"></div><div calss="ipynb-rendered ipynb-rendered-markdown">$rendered</div></div>"""
       case _ =>
         s"""<div class="ipynb-prompt ipynb-input-prompt">???</div><div class="ipynb-rendered ipynb-rendered-unknown"><code><pre>${cell.source.mkString("")}</pre></code></div>"""
@@ -142,7 +143,7 @@ class IpynbRenderer extends Renderer {
     val nb = json.extract[IPyNotebook]
 
     val cellsHtml = (if (nb.nbformat < 4) nb.worksheets.flatMap(_.cells) else nb.cells).map(cell =>
-      getCellHtml(nb, cell, repository, enableWikiLink, enableRefsLink)
+      getCellHtml(nb, cell, repository, branch, enableWikiLink, enableRefsLink)
     ).map(c => s"""<div class="ipynb-cell">$c</div>""").mkString("")
 
     s"""<link rel="stylesheet" href="$path/plugin-assets/ipynb/ipynb.css">
