@@ -1,4 +1,4 @@
-name: Scala CI
+name: Scala CI release
 
 on:
   push:
@@ -48,4 +48,3 @@ jobs:
         asset_name: plugin-jar
         tag: ${{ github.ref }}
         overwrite: true
-        body: ""
