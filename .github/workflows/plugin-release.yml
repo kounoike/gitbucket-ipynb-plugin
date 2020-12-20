@@ -44,7 +44,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/scala-*/gitbucket-ipynb-plugin-*.jar
+        file_glob: target/scala-*/gitbucket-ipynb-plugin-*.jar
         asset_name: plugin-jar
         tag: ${{ github.ref }}
         overwrite: true
